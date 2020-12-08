@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Units/Unit.gd" type="Script" id=1]
+[ext_resource path="res://GameBoard/Grid.tres" type="Resource" id=2]
+[ext_resource path="res://Units/unit_shadow.svg" type="Texture" id=3]
+
+[sub_resource type="Curve2D" id=1]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("PathFollow2D/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 1.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("PathFollow2D/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1.5, 1.5, 1.5, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Unit" type="Path2D"]
+curve = SubResource( 1 )
+script = ExtResource( 1 )
+grid = ExtResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotate = false
+loop = false
+
+[node name="Shadow" type="Sprite" parent="PathFollow2D"]
+modulate = Color( 0.101961, 0.109804, 0.0901961, 0.329412 )
+position = Vector2( 0, 5.43238 )
+texture = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="PathFollow2D"]
+position = Vector2( 2, 0 )
+scale = Vector2( 0.24, 0.24 )
+offset = Vector2( -3.8147e-06, -185 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/idle = SubResource( 2 )
+anims/selected = SubResource( 3 )

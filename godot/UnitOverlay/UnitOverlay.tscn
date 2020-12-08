@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://UnitOverlay/tileset_unit_overlay.svg" type="Texture" id=1]
+[ext_resource path="res://UnitOverlay/UnitOverlay.gd" type="Script" id=2]
+[ext_resource path="res://GameBoard/Grid.tres" type="Resource" id=3]
+
+[sub_resource type="TileSet" id=1]
+0/name = "tileset_unit_overlay.svg 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 80, 80 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[node name="UnitOverlay" type="TileMap"]
+modulate = Color( 1, 1, 1, 0.329412 )
+light_mask = 0
+tile_set = SubResource( 1 )
+cell_size = Vector2( 80, 80 )
+collision_layer = 0
+collision_mask = 0
+occluder_light_mask = 0
+format = 1
+script = ExtResource( 2 )
+grid = ExtResource( 3 )
