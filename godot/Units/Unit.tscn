@@ -1,16 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Units/Unit.gd" type="Script" id=1]
 [ext_resource path="res://GameBoard/Grid.tres" type="Resource" id=2]
 [ext_resource path="res://Units/unit_shadow.svg" type="Texture" id=3]
 
-[sub_resource type="Curve2D" id=1]
-resource_local_to_scene = true
-_data = {
-"points": PoolVector2Array(  )
-}
-
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("PathFollow2D/Sprite:modulate")
@@ -25,7 +19,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 length = 1.4
 loop = true
 tracks/0/type = "value"
@@ -42,7 +36,7 @@ tracks/0/keys = {
 }
 
 [node name="Unit" type="Path2D"]
-curve = SubResource( 1 )
+curve = null
 script = ExtResource( 1 )
 grid = ExtResource( 2 )
 
@@ -62,5 +56,5 @@ offset = Vector2( -3.8147e-06, -185 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
-anims/idle = SubResource( 2 )
-anims/selected = SubResource( 3 )
+anims/idle = SubResource( 1 )
+anims/selected = SubResource( 2 )

@@ -1,8 +1,12 @@
+## Player-controlled cursor. Allows them to navigate the game grid, select units, and move them.
+## Supports both keyboard and mouse (or touch) input.
 tool
 class_name Cursor
 extends Node2D
 
+## Emitted when clicking on the currently hovered cell or when pressing "ui_accept".
 signal accept_pressed(cell)
+## Emitted when the cursor moved to a new cell.
 signal moved(new_cell)
 
 enum State { IDLE, MOVING }

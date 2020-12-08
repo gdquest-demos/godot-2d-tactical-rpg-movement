@@ -33,9 +33,14 @@ onready var _path_follow: PathFollow2D = $PathFollow2D
 
 func _ready() -> void:
 	set_process(false)
-	cell = grid.calculate_grid_coordinates(position)
+
+	self.cell = grid.calculate_grid_coordinates(position)
 	position = grid.calculate_map_position(cell)
-	_sprite.position = skin_offset
+
+	# We create the curve resource here because creating it in the editor prevents us from
+	# moving the unit.
+	if not Engine.editor_hint:
+		curve = Curve2D.new()
 
 
 func _process(delta: float) -> void:
