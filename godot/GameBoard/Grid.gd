@@ -9,8 +9,6 @@ export var size := Vector2(20, 20)
 ## The size of a cell in pixels.
 export var cell_size := Vector2(80, 80)
 
-var cells_count := int(size.x * size.y)
-
 ## Half of ``cell_size``
 var _half_cell_size = cell_size / 2
 

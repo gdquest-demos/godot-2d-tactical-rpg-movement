@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grasslands.png-3fd7f29963dde10d776559428a660106.stex"
+path="res://.import/grasslands.png-350b47260edad6ae069b528460e4d1b5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GameBoard/grasslands.png"
-dest_files=[ "res://.import/grasslands.png-3fd7f29963dde10d776559428a660106.stex" ]
+source_file="res://Background/grasslands.png"
+dest_files=[ "res://.import/grasslands.png-350b47260edad6ae069b528460e4d1b5.stex" ]
 
 [params]
 
