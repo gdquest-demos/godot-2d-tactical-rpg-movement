@@ -4,9 +4,6 @@
 class_name GameBoard
 extends Node2D
 
-# warning-ignore:unused_signal
-signal unit_selected(unit)
-
 const DIRECTIONS = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
 
 ## Resource of type Grid.
@@ -54,10 +51,10 @@ func _reinitialize() -> void:
 	_units.clear()
 
 	for child in get_children():
-		if not child is Unit:
+		var unit := child as Unit
+		if not unit:
 			continue
-		var coordinates: Vector2 = grid.calculate_grid_coordinates(child.position)
-		_units[coordinates] = child
+		_units[unit.cell] = unit
 
 
 ## Returns an array with all the coordinates of walkable cells based on the `max_distance`.
