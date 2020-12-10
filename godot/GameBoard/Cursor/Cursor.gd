@@ -9,8 +9,6 @@ signal accept_pressed(cell)
 ## Emitted when the cursor moved to a new cell.
 signal moved(new_cell)
 
-enum State { IDLE, MOVING }
-
 ## Grid resource, giving the node access to the grid size, and more.
 export var grid: Resource
 ## Time before the cursor can move again in seconds.
@@ -36,7 +34,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		emit_signal("accept_pressed", cell)
 		get_tree().set_input_as_handled()
 
-	var should_move := event.is_pressed() and event.is_echo() and _timer.is_stopped()
+	var should_move := event.is_pressed() 
+	if event.is_echo():
+		should_move = should_move and _timer.is_stopped()
+
 	if not should_move:
 		return
 
