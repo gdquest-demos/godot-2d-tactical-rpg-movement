@@ -91,7 +91,7 @@ func _move_active_unit(new_cell: Vector2) -> void:
 	_units.erase(_active_unit.cell)
 	_units[new_cell] = _active_unit
 	_deselect_active_unit()
-	_active_unit.walk_along(_unit_path.get_current_path())
+	_active_unit.walk_along(_unit_path.current_path)
 	yield(_active_unit, "walk_finished")
 	_clear_active_unit()
 

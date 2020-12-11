@@ -5,8 +5,7 @@ extends TileMap
 export var grid: Resource
 
 var _pathfinder: PathFinder
-var _cell_start
-var _current_path := PoolVector2Array()
+var current_path := PoolVector2Array()
 
 
 ## Creates a new PathFinder that uses the AStar algorithm to find a path between two cells among
@@ -18,8 +17,8 @@ func initialize(walkable_cells: Array) -> void:
 ## Finds and draws the path between `cell_start` and `cell_end`
 func draw(cell_start: Vector2, cell_end: Vector2) -> void:
 	clear()
-	_current_path = _pathfinder.calculate_point_path(cell_start, cell_end)
-	for cell in _current_path:
+	current_path = _pathfinder.calculate_point_path(cell_start, cell_end)
+	for cell in current_path:
 		set_cellv(cell, 0)
 	update_bitmask_region()
 
@@ -28,9 +27,3 @@ func draw(cell_start: Vector2, cell_end: Vector2) -> void:
 func stop() -> void:
 	_pathfinder = null
 	clear()
-
-
-## Returns the path cached during the last call to `draw()`, to pass it to a unit and allow it to
-## walk alongside it.
-func get_current_path() -> PoolVector2Array:
-	return _current_path

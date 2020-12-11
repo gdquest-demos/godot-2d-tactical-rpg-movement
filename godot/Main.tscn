@@ -11,6 +11,11 @@
 [ext_resource path="res://Units/bugcat.png" type="Texture" id=9]
 [ext_resource path="res://Background/Map.tscn" type="PackedScene" id=10]
 
+[sub_resource type="Curve2D" id=1]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector2Array(  )
+}
 
 [sub_resource type="Curve2D" id=2]
 resource_local_to_scene = true
@@ -19,12 +24,6 @@ _data = {
 }
 
 [sub_resource type="Curve2D" id=3]
-resource_local_to_scene = true
-_data = {
-"points": PoolVector2Array(  )
-}
-
-[sub_resource type="Curve2D" id=4]
 resource_local_to_scene = true
 _data = {
 "points": PoolVector2Array(  )
@@ -43,30 +42,26 @@ grid = ExtResource( 4 )
 [node name="UnitPath" parent="GameBoard" instance=ExtResource( 6 )]
 
 [node name="Cursor" parent="GameBoard" instance=ExtResource( 1 )]
-ui_cooldown = 0.1
 
 [node name="Bear" parent="GameBoard" instance=ExtResource( 2 )]
 position = Vector2( 600, 480 )
-curve = SubResource( 2 )
+curve = SubResource( 1 )
 skin = ExtResource( 8 )
 move_range = 3
 skin_offset = Vector2( 2, 9 )
-move_speed = 600.0
 
 [node name="Cat" parent="GameBoard" instance=ExtResource( 2 )]
 position = Vector2( 850.293, 412.465 )
-curve = SubResource( 3 )
+curve = SubResource( 2 )
 skin = ExtResource( 9 )
 move_range = 8
 skin_offset = Vector2( 5, 12 )
-move_speed = 600.0
 
 [node name="Squirrel" parent="GameBoard" instance=ExtResource( 2 )]
 position = Vector2( 355.298, 298.556 )
-curve = SubResource( 4 )
+curve = SubResource( 3 )
 skin = ExtResource( 7 )
 move_range = 5
 skin_offset = Vector2( 6, 17 )
-move_speed = 600.0
 [connection signal="accept_pressed" from="GameBoard/Cursor" to="GameBoard" method="_on_Cursor_accept_pressed"]
 [connection signal="moved" from="GameBoard/Cursor" to="GameBoard" method="_on_Cursor_moved"]
