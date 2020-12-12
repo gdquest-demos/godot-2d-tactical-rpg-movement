@@ -14,7 +14,6 @@ var _units := {}
 var _active_unit: Unit
 var _walkable_cells := []
 
-onready var _cursor: Cursor = $Cursor
 onready var _unit_overlay: UnitOverlay = $UnitOverlay
 onready var _unit_path: UnitPath = $UnitPath
 
@@ -77,6 +76,8 @@ func _flood_fill(cell: Vector2, max_distance: int) -> Array:
 		for direction in DIRECTIONS:
 			var coordinates: Vector2 = current + direction
 			if is_occupied(coordinates):
+				continue
+			if coordinates in array:
 				continue
 
 			stack.append(coordinates)
