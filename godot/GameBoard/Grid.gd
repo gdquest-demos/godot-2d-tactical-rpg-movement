@@ -32,8 +32,8 @@ func is_within_bounds(cell_coordinates: Vector2) -> bool:
 ## Makes the `grid_position` fit within the grid's bounds.
 func clamp(grid_position: Vector2) -> Vector2:
 	var out := grid_position
-	out.x = clamp(out.x, 0, size.x)
-	out.y = clamp(out.y, 0, size.y)
+	out.x = clamp(out.x, 0, size.x - 1.0)
+	out.y = clamp(out.y, 0, size.y - 1.0)
 	return out
 
 
