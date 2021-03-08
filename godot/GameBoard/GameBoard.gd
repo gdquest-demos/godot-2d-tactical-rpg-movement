@@ -37,7 +37,7 @@ func _get_configuration_warning() -> String:
 
 ## Returns `true` if the cell is occupied by a unit.
 func is_occupied(cell: Vector2) -> bool:
-	return true if _units.has(cell) else false
+	return _units.has(cell)
 
 
 ## Returns an array of cells a given unit can walk using the flood fill algorithm.
