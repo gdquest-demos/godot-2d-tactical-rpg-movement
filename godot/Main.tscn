@@ -40,6 +40,7 @@ grid = ExtResource( 4 )
 [node name="UnitOverlay" parent="GameBoard" instance=ExtResource( 5 )]
 
 [node name="UnitPath" parent="GameBoard" instance=ExtResource( 6 )]
+tile_data = PoolIntArray(  )
 
 [node name="Cursor" parent="GameBoard" instance=ExtResource( 1 )]
 
@@ -63,5 +64,6 @@ curve = SubResource( 3 )
 skin = ExtResource( 7 )
 move_range = 5
 skin_offset = Vector2( 6, 17 )
+
 [connection signal="accept_pressed" from="GameBoard/Cursor" to="GameBoard" method="_on_Cursor_accept_pressed"]
 [connection signal="moved" from="GameBoard/Cursor" to="GameBoard" method="_on_Cursor_moved"]
