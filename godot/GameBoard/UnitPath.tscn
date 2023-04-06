@@ -1,13 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://dxyfefsgkgc4l"]
 
-[ext_resource path="res://GameBoard/UnitPath.gd" type="Script" id=1]
-[ext_resource path="res://GameBoard/unit_path_tileset.tres" type="TileSet" id=2]
-[ext_resource path="res://GameBoard/Grid.tres" type="Resource" id=3]
+[ext_resource type="Script" path="res://GameBoard/UnitPath.gd" id="1"]
+[ext_resource type="TileSet" uid="uid://dqg14aj86so4a" path="res://GameBoard/unit_path_tileset.tres" id="2"]
+[ext_resource type="Resource" path="res://GameBoard/Grid.tres" id="3"]
 
 [node name="UnitPath" type="TileMap"]
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 80, 80 )
-format = 1
-tile_data = PoolIntArray( 131075, 0, 131075, 131076, 0, 1, 131077, 0, 65537, 196613, 0, 2, 262149, 0, 131072, 262150, 0, 1, 262151, 0, 1, 262152, 0, 65539 )
-script = ExtResource( 1 )
-grid = ExtResource( 3 )
+tile_set = ExtResource("2")
+format = 2
+script = ExtResource("1")
+grid = ExtResource("3")

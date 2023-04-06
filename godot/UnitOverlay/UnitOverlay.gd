@@ -7,4 +7,4 @@ extends TileMap
 func draw(cells: Array) -> void:
 	clear()
 	for cell in cells:
-		set_cellv(cell, 0)
+		set_cell(0, cell, 0, Vector2i(0,0))

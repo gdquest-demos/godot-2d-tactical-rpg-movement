@@ -2,10 +2,10 @@
 class_name UnitPath
 extends TileMap
 
-export var grid: Resource
+@export var grid: Resource
 
 var _pathfinder: PathFinder
-var current_path := PoolVector2Array()
+var current_path := PackedVector2Array()
 
 
 ## Creates a new PathFinder that uses the AStar algorithm to find a path between two cells among
@@ -18,9 +18,12 @@ func initialize(walkable_cells: Array) -> void:
 func draw(cell_start: Vector2, cell_end: Vector2) -> void:
 	clear()
 	current_path = _pathfinder.calculate_point_path(cell_start, cell_end)
-	for cell in current_path:
-		set_cellv(cell, 0)
-	update_bitmask_region()
+	# Instead of looping over the path to set their tileset index and
+	#	calling update_bitmask_region() (which is removed in 4.0) we can
+	#	instead pass the path (which is a Vector2[]) to this function so
+	#	all the tiles in this path and layer given are updated to use
+	#	terrain from the given terrain set
+	set_cells_terrain_connect(0, current_path, 0, 0)
 
 
 ## Stops drawing, clearing the drawn path and the `_pathfinder`.

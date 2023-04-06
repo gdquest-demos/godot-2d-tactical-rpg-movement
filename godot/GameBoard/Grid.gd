@@ -5,9 +5,9 @@ class_name Grid
 extends Resource
 
 ## The grid's rows and columns.
-export var size := Vector2(20, 20)
+@export var size := Vector2(20, 20)
 ## The size of a cell in pixels.
-export var cell_size := Vector2(80, 80)
+@export var cell_size := Vector2(80, 80)
 
 ## Half of ``cell_size``
 var _half_cell_size = cell_size / 2
@@ -30,13 +30,8 @@ func is_within_bounds(cell_coordinates: Vector2) -> bool:
 
 
 ## Makes the `grid_position` fit within the grid's bounds.
-func clamp(grid_position: Vector2) -> Vector2:
+func grid_clamp(grid_position: Vector2) -> Vector2:
 	var out := grid_position
 	out.x = clamp(out.x, 0, size.x - 1.0)
 	out.y = clamp(out.y, 0, size.y - 1.0)
 	return out
-
-
-# Returns the coordinates as an integer, to convert 2D coordinates to a 1D array
-func as_index(cell: Vector2) -> int:
-	return int(cell.x + size.x * cell.y)

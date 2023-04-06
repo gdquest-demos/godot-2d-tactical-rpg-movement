@@ -1,18 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://bv1ul1qynrdwd"]
 
-[ext_resource path="res://GameBoard/Cursor/Cursor.gd" type="Script" id=1]
-[ext_resource path="res://GameBoard/Cursor/menu_selection_arrow.png" type="Texture" id=2]
-[ext_resource path="res://GameBoard/Grid.tres" type="Resource" id=3]
+[ext_resource type="Script" path="res://GameBoard/Cursor/Cursor.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dsmh2fn7kpkri" path="res://GameBoard/Cursor/menu_selection_arrow.png" id="2"]
+[ext_resource type="Resource" path="res://GameBoard/Grid.tres" id="3"]
 
 [node name="Cursor" type="Node2D"]
-script = ExtResource( 1 )
-grid = ExtResource( 3 )
+script = ExtResource("1")
+grid = ExtResource("3")
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0.193848, 0 )
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0.193848, 0)
 rotation = 2.35619
-texture = ExtResource( 2 )
-offset = Vector2( -67, 0 )
+texture = ExtResource("2")
+offset = Vector2(-67, 0)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
