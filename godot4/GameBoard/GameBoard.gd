@@ -7,15 +7,15 @@ extends Node2D
 const DIRECTIONS = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
 
 ## Resource of type Grid.
-export var grid: Resource
+@export var grid: Resource
 
 ## Mapping of coordinates of a cell to a reference to the unit it contains.
 var _units := {}
 var _active_unit: Unit
 var _walkable_cells := []
 
-onready var _unit_overlay: UnitOverlay = $UnitOverlay
-onready var _unit_path: UnitPath = $UnitPath
+@onready var _unit_overlay: UnitOverlay = $UnitOverlay
+@onready var _unit_path: UnitPath = $UnitPath
 
 
 func _ready() -> void:
@@ -60,7 +60,7 @@ func _reinitialize() -> void:
 func _flood_fill(cell: Vector2, max_distance: int) -> Array:
 	var array := []
 	var stack := [cell]
-	while not stack.empty():
+	while not stack.size() == 0:
 		var current = stack.pop_back()
 		if not grid.is_within_bounds(current):
 			continue
@@ -79,6 +79,10 @@ func _flood_fill(cell: Vector2, max_distance: int) -> Array:
 				continue
 			if coordinates in array:
 				continue
+			# Minor optimization: If this neighbor is already queued
+			#	to be checked, we don't need to queue it again
+			if coordinates in stack:
+				continue
 
 			stack.append(coordinates)
 	return array
@@ -93,7 +97,7 @@ func _move_active_unit(new_cell: Vector2) -> void:
 	_units[new_cell] = _active_unit
 	_deselect_active_unit()
 	_active_unit.walk_along(_unit_path.current_path)
-	yield(_active_unit, "walk_finished")
+	await _active_unit.walk_finished
 	_clear_active_unit()
 
 
