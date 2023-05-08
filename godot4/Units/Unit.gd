@@ -10,29 +10,25 @@ signal walk_finished
 
 ## Shared resource of type Grid, used to calculate map coordinates.
 @export var grid: Resource
+## Distance to which the unit can walk in cells.
+@export var move_range := 6
+## The unit's move speed when it's moving along a path.
+@export var move_speed := 600.0
 ## Texture representing the unit.
 @export var skin: Texture:
 	set(value):
-		# Both setters manipulate the unit's Sprite node
-		# Here, we update the sprite's texture
 		skin = value
 		if not _sprite:
-			# The yield keyword was removed in Godot 4.0, we need to await this
-			#	signal instead -- this will resume execution after this node's
-			#	_ready() callback has ended
-			await self.ready
+			# This will resume execution after this node's _ready()
+			await ready
 		_sprite.texture = value
-## Distance to which the unit can walk in cells.
-@export var move_range := 6
 ## Offset to apply to the `skin` sprite in pixels.
 @export var skin_offset := Vector2.ZERO:
 	set(value):
 		skin_offset = value
 		if not _sprite:
-			await self.ready
+			await ready
 		_sprite.position = value
-## The unit's move speed when it's moving along a path.
-@export var move_speed := 600.0
 
 ## Coordinates of the current cell the cursor moved to.
 var cell := Vector2.ZERO:
@@ -63,7 +59,7 @@ func _ready() -> void:
 	set_process(false)
 	_path_follow.rotates = false
 
-	self.cell = grid.calculate_grid_coordinates(position)
+	cell = grid.calculate_grid_coordinates(position)
 	position = grid.calculate_map_position(cell)
 
 	# We create the curve resource here because creating it in the editor prevents us from
@@ -75,9 +71,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_path_follow.progress += move_speed * delta
 
-	if _path_follow.progress_ratio >= 1.0: # or curve.get_baked_length():
-		self._is_walking = false
-		# Setting this value to 0 or 0.0 causes a Zero Length Interval error
+	if _path_follow.progress_ratio >= 1.0:
+		_is_walking = false
+		# Setting this value to 0.0 causes a Zero Length Interval error
 		_path_follow.progress = 0.00001
 		position = grid.calculate_map_position(cell)
 		curve.clear_points()
@@ -94,4 +90,4 @@ func walk_along(path: PackedVector2Array) -> void:
 	for point in path:
 		curve.add_point(grid.calculate_map_position(point) - position)
 	cell = path[-1]
-	self._is_walking = true
+	_is_walking = true

@@ -19,17 +19,18 @@ var cell := Vector2.ZERO:
 	set(value):
 		# We first clamp the cell coordinates and ensure that we aren't
 		#	trying to move outside the grid boundaries
-		var new_cell: Vector2 = self.grid.grid_clamp(value)
+		var new_cell: Vector2 = grid.grid_clamp(value)
 		if new_cell.is_equal_approx(cell):
 			return
+
 		cell = new_cell
 		# If we move to a new cell, we update the cursor's position, emit
 		#	a signal, and start the cooldown timer that will limit the rate
 		#	at which the cursor moves when we keep the direction key held
 		#	down
-		self.position = self.grid.calculate_map_position(cell)
+		position = grid.calculate_map_position(cell)
 		emit_signal("moved", cell)
-		self._timer.start()
+		_timer.start()
 
 @onready var _timer: Timer = $Timer
 
@@ -42,7 +43,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	# Navigating cells with the mouse.
 	if event is InputEventMouseMotion:
-		self.cell = grid.calculate_grid_coordinates(event.position)
+		cell = grid.calculate_grid_coordinates(event.position)
 	# Trying to select something in a cell.
 	elif event.is_action_pressed("click") or event.is_action_pressed("ui_accept"):
 		emit_signal("accept_pressed", cell)
@@ -57,13 +58,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	# Moves the cursor by one grid cell.
 	if event.is_action("ui_right"):
-		self.cell += Vector2.RIGHT
+		cell += Vector2.RIGHT
 	elif event.is_action("ui_up"):
-		self.cell += Vector2.UP
+		cell += Vector2.UP
 	elif event.is_action("ui_left"):
-		self.cell += Vector2.LEFT
+		cell += Vector2.LEFT
 	elif event.is_action("ui_down"):
-		self.cell += Vector2.DOWN
+		cell += Vector2.DOWN
 
 
 func _draw() -> void:

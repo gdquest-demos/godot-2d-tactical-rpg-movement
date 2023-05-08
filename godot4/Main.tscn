@@ -38,22 +38,22 @@ grid = ExtResource("4")
 [node name="Bear" parent="GameBoard" instance=ExtResource("2")]
 position = Vector2(600, 480)
 curve = SubResource("1")
-skin = ExtResource("8")
 move_range = 3
+skin = ExtResource("8")
 skin_offset = Vector2(2, 9)
 
 [node name="Cat" parent="GameBoard" instance=ExtResource("2")]
 position = Vector2(850.293, 412.465)
 curve = SubResource("2")
-skin = ExtResource("9")
 move_range = 8
+skin = ExtResource("9")
 skin_offset = Vector2(5, 12)
 
 [node name="Squirrel" parent="GameBoard" instance=ExtResource("2")]
 position = Vector2(355.298, 298.556)
 curve = SubResource("3")
-skin = ExtResource("7")
 move_range = 5
+skin = ExtResource("7")
 skin_offset = Vector2(6, 17)
 
 [connection signal="accept_pressed" from="GameBoard/Cursor" to="GameBoard" method="_on_Cursor_accept_pressed"]
