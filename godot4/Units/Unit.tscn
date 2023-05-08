@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://d4mhjq651egt"]
+
+[ext_resource type="Script" path="res://Units/Unit.gd" id="1"]
+[ext_resource type="Resource" path="res://GameBoard/Grid.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://b5ghlcxjxmmgw" path="res://Units/unit_shadow.svg" id="3"]
+
+[sub_resource type="Animation" id="1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="2"]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1.5, 1.5, 1.5, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5dan3"]
+_data = {
+"idle": SubResource("1"),
+"selected": SubResource("2")
+}
+
+[node name="Unit" type="Path2D"]
+script = ExtResource("1")
+grid = ExtResource("2")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+loop = false
+
+[node name="Shadow" type="Sprite2D" parent="PathFollow2D"]
+modulate = Color(0.101961, 0.109804, 0.0901961, 0.329412)
+position = Vector2(0, 5.43238)
+texture = ExtResource("3")
+
+[node name="Sprite" type="Sprite2D" parent="PathFollow2D"]
+position = Vector2(2, 0)
+scale = Vector2(0.24, 0.24)
+offset = Vector2(-3.8147e-06, -185)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_5dan3")
+}
